@@ -1,0 +1,22 @@
+<div id="news-box" class="news-box box">
+  <header class="box-header with-btn-right clearfix">
+    <h4 class="title">Notícias <small><%= link_to news_index_path, :class => "more-a", :title => "Ver mais notícias" do %>Veja Mais <span class="icon arrow"></span><% end %></small></h4>
+  </header>
+  <div id="news-box-content" class="box-content relative">
+    <ul id="news-carousel" class="news-carousel carousel carousel-vertical unstyled">
+      <% @news_box.each do |news| %>
+          <li class="news-carousel-li news-block">
+            <%= link_to news_path(news), :class => "photo", :title => news.title do %>
+              <figure class="photo-border">
+                <span></span>
+                <%= show_image news.thumb, "84x59", news.title %>
+              </figure>
+              <div class="content">
+                <h3 class="title"><%= strip_tags(truncate(news.title, length: 67)).html_safe %></h3>
+              </div>
+            <% end %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div><!-- #news-box -->

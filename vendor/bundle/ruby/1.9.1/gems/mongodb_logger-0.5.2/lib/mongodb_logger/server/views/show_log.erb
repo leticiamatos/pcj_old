@@ -1,0 +1,115 @@
+<%= partial(:"shared/top_panel") %>
+
+<div class="unit-right">
+  <div class="pam">
+    <a href="<%=h url_path("overview") %>" data-pjax='true' class="button small grey">Back</a>
+  </div> <!-- pam -->
+</div> <!-- unit-right -->
+<h1 class="pam">Log #<%=h @log['_id'] %></h1>
+<ul class="list">
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Url:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <a href="<%=h @log['url']%>" target="_blank"><%=h @log['url']%></a>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Controller:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <%=h @log['controller'] %>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Action:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <%=h @log['action'] %>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Method:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <%=h @log['method'] %>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">IP:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <a href="http://www.infosniper.net/index.php?ip_address=<%=h @log['ip'] %>&map_source=1&overview_map=1&lang=1&map_type=1&zoom_level=7" target="_blank">
+        <%=h @log['ip'] %>
+      </a>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Request Time:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <%=h @log['request_time'] %>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Runtime:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <%=h @log['runtime'] %> ms
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Application Name:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <%=h @log['application_name'] %>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Path:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <%=h @log['path'] %>
+    </div> <!-- unit -->
+  </li>
+  <li class="outer pvs phm">
+    <div class="unit size1of5">
+      <span class="pale">Params:</span>
+    </div> <!-- unit -->
+    <div class="unit size4of5">
+      <pre><code><%= pretty_hash(@log['params']) %></code></pre>
+    </div> <!-- unit -->
+  </li>
+  <% if @log['messages'] && !@log['messages'].blank? && @log['messages'].is_a?(Hash) %>
+    <%= partial(:"shared/message_tabs", :object => @log['messages']) %>
+  <% end %>
+  <% unless meta_informations(@log).blank? %>
+    <li class="outer pvs phm">
+      <div class="unit size1of5">
+        <span class="pale">Meta informations:</span>
+      </div> <!-- unit -->
+      <div class="unit size4of5">
+        <pre><code><%= pretty_hash(meta_informations(@log)) %></code></pre>
+      </div> <!-- unit -->
+    </li>
+  <% end %>
+  <% unless @log['session'].blank? %>
+    <li class="outer pvs phm">
+      <div class="unit size1of5">
+        <span class="pale">Session:</span>
+      </div> <!-- unit -->
+      <div class="unit size4of5">
+        <pre><code><%= pretty_hash(@log['session']) %></code></pre>
+      </div> <!-- unit -->
+    </li>
+  <% end %>
+</ul>

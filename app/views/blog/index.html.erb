@@ -1,0 +1,94 @@
+<div class="teachers-profile-header blog-teacher-header">
+  <div class="teachers-profile-primary">
+      <div class="teachers-profile-primary-content container relative">
+          <div class="teachers-profile-primary-text">
+              <h1 class="title teachers-title">Aryanna Manfredini</h1>
+              <p class="desc">Processo do Trabalho</p>
+          </div>
+          <figure class="teachers-profile-figure">
+              <img src="/assets/teachers/aryanna.png" alt="">
+          </figure>
+      </div>
+  </div>
+  <nav class="teachers-profile-nav">
+      <div class="container">
+          <ul class="teachers-links teachers-profile-nav-ul unstyled">
+              <li>
+                <%= link_to "#", :class => "l-profile", :title => "Blog" do %>
+                    <i class="icon"></i>Perfil
+                <% end %>
+              </li>
+              <li class="active">
+                <%= link_to teacher_blog_path(Cers::Teacher.first), :class => "l-blog", :title => "Blog" do %>
+                    <i class="icon"></i>Blog
+                <% end %>
+              </li>
+              <li><a href="" title="Cursos" class="l-courses" target="_blank"><i class="icon"></i>Cursos</a></li>
+          </ul>
+      </div>
+  </nav>
+</div>
+<div class="content-lighten">
+   <div class="content-inner two-columns container clearfix">
+      <section class="box relative col col-large">
+         <div id="blog-list" class="blog-list">
+            <!--=======================================
+            ITEM DE BLOG 
+            =========================================-->
+            <% @posts.each do |post|%>
+              <article class="post article">
+                 <header class="article-header">
+                    <span class="article-date"><%= post.updated_at.strftime("%d de %B de %Y") %></span>
+                    <h2 class="article-title">
+                       <%= link_to post.title, "#" %>
+                    </h2>
+                    <div class="social clearfix">
+                       <span class="google">
+                          <div class="g-plusone" data-size="medium"></div>
+                       </span>
+                       <span class="twitter">
+                          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt">Tweetar</a>
+                       </span>
+                       <span class="facebook">
+                          <div class="fb-like" data-send="true" data-layout="button_count" data-width="140" data-show-faces="false"></div>
+                       </span>
+                       <span class="comment">
+                          <a href="/blog/show#comments" class="comment-a">
+                             <i class="icon-comment"></i>
+                             <span>Comente (<fb:comments-count href=http://example.com/></fb:comments-count>)</span>
+                          </a>
+                       </span>
+                    </div>
+                 </header>
+                 <section class="article-content">
+                    <%= post.content.html_safe %>
+                 </section>
+                 <footer class="article-footer">
+                    <div class="social clearfix">
+                       <span class="google">
+                          <div class="g-plusone" data-size="medium"></div>
+                       </span>
+                       <span class="twitter">
+                          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt">Tweetar</a>
+                       </span>
+                       <span class="facebook">
+                          <div class="fb-like" data-send="true" data-layout="button_count" data-width="140" data-show-faces="false"></div>
+                       </span>
+                       <span class="comment">
+                          <a href="/blog/show#comments" class="comment-a">
+                             <i class="icon-comment"></i>
+                             <span>Comente (<fb:comments-count href=http://example.com/></fb:comments-count>)</span>
+                          </a>
+                       </span>
+                    </div>
+                 </footer>
+              </article><!-- .article -->
+            <% end %>
+            <%= paginate @posts %>
+         </div><!-- #blog-list -->
+      </section><!-- .box -->
+
+      <%= render :partial => 'layouts/aside_blog' %>
+      
+   </div><!-- .content-inner -->
+</div>

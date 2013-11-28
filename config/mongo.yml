@@ -1,0 +1,16 @@
+defaults: &defaults
+  host: localhost
+  port: 27017
+
+development:
+  <<: *defaults
+  database: development
+
+test:
+  <<: *defaults
+  database: manager_test
+
+# set these environment variables on your prod server
+production:
+  <<: *defaults
+  database: kurumi_mongo

@@ -1,0 +1,17 @@
+pt-BR:
+  routes:
+    teachers: professores
+    books: livros
+    courses: cursos
+    course: curso
+    search: pesquisa
+    news: noticias
+    all: todas
+    root: inicio
+    download: downloads
+    contact_us: contato
+    about_us: quem-somos
+    terms: termos
+    privacy: privacidade
+    home: inicio
+    careers: carreiras

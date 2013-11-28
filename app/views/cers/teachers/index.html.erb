@@ -1,0 +1,56 @@
+<div class="content-inner two-columns container clearfix">
+  <section class="box relative col col-large">
+    <header class="box-header content-header">
+      <h2 class="title title-section">Professores</h2>
+    </header>
+    <div class="box-content">
+      <ul class="teachers-list unstyled">
+        <% @teachers.each do |teacher| %>
+        <li class="teachers-list-li">
+          <div class="teachers-box">
+            <%= link_to teacher_path(teacher), :class => "photo teachers-a" do %>
+                <figure class="photo-border">
+                  <span></span>
+                  <%= show_image teacher.avatar, "130", "130" %>
+                </figure>
+            <% end %>
+            <div class="teachers-content">
+              <div class="teachers-top">
+                <h2 class="title"><%= teacher.name %></h2>
+                <!-- Forcando exibicao de flag para o professor Sanches, REMOVER ASSIM QUE POSSIVEL!!!!!!!!! -->
+                <% if teacher.id == 260 %>
+                  <p style="margin:0;">Coordenador Científico</p>
+                <% end %>
+                <!--<span class="desc">< %= teacher.cers_subjects[0].title if teacher.cers_subjects.size > 0 %></span>-->
+              </div>
+              <ul class="teachers-links unstyled">
+                <li>
+                  <%= link_to teacher_path(teacher), :class => "l-profile", :title => "Perfil" do %>
+                      <i class="icon"></i>Perfil
+                  <% end %>
+                </li>
+                <!--li>
+                  < %= link_to teacher_path(teacher), :class => "l-blog", :title => "Blog" do %>
+                      <i class="icon"></i>Blog
+                  < % end %>
+                </li-->
+                <li>
+                  <!-- < %= link_to teacher_path(teacher), :class => "l-courses", :title => "Cursos" do %>
+                      <i class="icon"></i>Cursos
+                  < % end %> -->
+                </li>
+              </ul>
+            </div>
+          </div><!-- .teachers-box -->
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </section><!-- .box -->
+  <div class="col col-default shadow">
+    <%= render :partial => 'layouts/news_box' %>
+  </div><!-- col-default -->
+</div><!-- .content-inner -->
+<% content_for :scripts do %>
+    <%= javascript_include_tag "teachers" %>
+<% end %>

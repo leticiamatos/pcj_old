@@ -1,0 +1,62 @@
+<%= partial(:"shared/top_panel") %>
+
+<div class="outer">
+  <div class="unit size3of4">
+    <div class="filter phm pvs">
+      <form id="analyticForm" action="<%=h url_path("analytics") %>" method="post" accept-charset="UTF-8">
+        <div class="outer mvs">
+          <div class="unit size1of2">
+            <div class="unit size1of2">
+              <div class="prm">
+                <%= select_tag @analytic, :type, MongodbLogger::ServerModel::Analytic::ANALYTIC_TYPES %>
+              </div> <!-- prm -->                        
+            </div>
+            <div class="unit size1of2">
+              <div class="prm">
+                <%= select_tag @analytic, :unit, MongodbLogger::ServerModel::Analytic::ANALYTIC_UNITS %>
+              </div>
+            </div>            
+          </div>                
+            <div class="unit size1of2">
+              <div class="unit size1of2">
+                <div class="prm">
+                  <%= text_field_tag @analytic, :start_date, :placeholder => "Start date", :class => "datepicker" %>
+                </div> <!-- prm -->                
+              </div> <!-- unit -->   
+              <div class="unit size1of2">
+                <div class="prm">
+                  <%= text_field_tag @analytic, :end_date, :placeholder => "End date", :class => "datepicker" %>
+                </div>
+              </div>
+            </div>
+        </div> <!-- outer -->
+        
+        <div class="outer">
+          <%= submit_tag :submit, "Analyze", :class => "button primary mrs" %> <a href="<%=h url_path("analytics") %>">Clear</a>
+        </div> <!-- outer -->
+        
+      </form>
+      </div> <!-- filter -->
+
+      <div class="filter_toggle filter-toggle"><span class="arrow-down">Analyze</span></div>
+      <div style="margin: 10px">
+        <div id="analyticData">
+          <div class="pal txtC">
+            Select what to analyze
+          </div>
+        </div>
+      </div>
+      
+  </div> <!-- unit size3of4 -->
+  
+  <div class="unit size1of4">
+    <div class="details">
+      
+      <div id="logInfo">
+        <div class="pale h2 pal txtC">
+          Comming soon...
+        </div> <!-- pale h2 -->
+      </div>
+    </div> <!-- details -->    
+  </div> <!-- unit size1of4 -->
+</div> <!-- outer -->

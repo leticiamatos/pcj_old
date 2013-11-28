@@ -1,0 +1,214 @@
+<div class="content-inner two-columns container clearfix">
+<section id="teachers-box" class="box relative col col-large">
+  <header class="box-header">
+    <h4 class="title">Professores
+      <small>
+        <%= link_to teachers_path, :class => "more-a", :title => "Ver todos os professores" do %>
+          Mais Professores <span class="icon arrow"></span>
+        <% end %>
+      </small>
+    </h4>
+  </header> 
+  <div id="teachers-box-content" class="box-content">
+    <% if @teachers.size > 0 %>
+    <ul id="teachers-carousel" class="teachers-carousel carousel-horizontal unstyled">
+      <li class="teachers-carousel-li clearfix">
+        <% @teachers[0, 4].each do |teacher| %>
+        <div class="teachers-box">
+          <%= link_to teacher_path(teacher), :class => "photo teachers-a" do %>
+            <figure class="photo-border">
+              <span></span>
+              <%= show_image teacher.avatar, "130", "130" %>
+            </figure>
+          <% end %>
+          <div class="teachers-content">
+            <div class="teachers-top">
+              <%= link_to teacher_path(teacher) do %>
+                <h2 class="title"><%= teacher.name %></h2>
+              <% end %>
+              <!-- Forcando exibicao de flag para o professor Sanches, REMOVER ASSIM QUE POSSIVEL!!!!!!!!! -->
+              <% if teacher.id == 260 %>
+                <span class="desc" style="color: #315D9F;">Coordenador Científico</span>
+              <% end %>
+              <span class="desc"><%= teacher.try(:cers_subject).try(:title) %></span>
+            </div>
+            <ul class="teachers-links unstyled">
+              <li>
+                <%= link_to teacher_path(teacher), :class => "l-profile", :title => "Perfil" do %>
+                <i class="icon"></i>Perfil
+                <% end %>
+              </li>
+              <!--<li>
+                < %= link_to teacher_path(teacher), :class => "l-blog", :title => "Blog" do %>
+                <i class="icon"></i>Blog
+                < % end %>
+              </li> -->
+              <li>
+                <!-- < %= link_to teacher_path(teacher), :class => "l-courses", :title => "Cursos" do %>
+                <i class="icon"></i>Cursos
+                < % end %> -->
+              </li>
+            </ul>
+          </div>
+        </div><!-- .teachers-box -->
+        <% end %>
+      </li>
+      <li class="teachers-carousel-li clearfix">
+        <% @teachers[4, 8].each do |teacher| %>
+        <div class="teachers-box">
+          <%= link_to teacher_path(teacher), :class => "photo teachers-a" do %>
+              <figure class="photo-border">
+                <span></span>
+                <%= show_image teacher.avatar, "130", "130" %>
+              </figure>
+          <% end %>
+          <div class="teachers-content">
+            <div class="teachers-top">
+              <h2 class="title"><%=teacher.name%></h2>
+              <span class="desc"><%= teacher.try(:cers_subject).try(:title) %></span>
+            </div>
+            <ul class="teachers-links unstyled">
+              <li>
+                <%= link_to teacher_path(teacher), :class => "l-profile", :title => "Perfil" do %>
+                    <i class="icon"></i>Perfil
+                <% end %>
+              </li>
+              <li>
+                <!-- < %= link_to teacher_path(teacher), :class => "l-blog", :title => "Blog" do %>
+                    <i class="icon"></i>Blog
+                < % end %>
+              </li>
+              <li>
+                < %= link_to teacher_path(teacher), :class => "l-courses", :title => "Cursos" do %>
+                    <i class="icon"></i>Cursos
+                < % end %> -->
+              </li>
+            </ul>
+          </div>
+        </div><!-- .teachers-box -->
+        <% end %>
+      </li>
+      <ul><!-- #teachers-carousel -->
+      <% end %>
+  </div>
+</section><!-- #teachers-box -->
+<div class="col col-default">
+  <%= render :partial => 'layouts/news_box' %>
+</div><!-- col-default -->
+</div><!-- .content-inner -->
+<!--==========================================================================
+CURSOS
+========================================================================== -->
+<div class="courses-main">
+  <div class="courses-main-content container">
+    <%= render partial: "cers/courses/search_form" %>
+    <!--==========================================================================
+    RESULTADO
+    ========================================================================== -->
+    <section id="courses-result" class="courses-result" style="display:none">
+      <div class="new-mod-courses mod-courses-result">
+        <div class="courses-result-header">
+          <a id="btn-close-courses-result" href="javascript:;" class="btn-close close-courses-result">
+            <i class="icon"></i> Fechar Busca
+          </a>
+        </div><!-- .courses-result-header -->
+        <div id="load-search" class="new-mod-courses-box current" style="text-transform: uppercase;">
+        </div><!-- .new-mod-courses-box -->
+      </div><!-- .new-mod-courses -->
+    </section><!-- #courses-result -->
+    <section class="courses-featured box">
+      <header class="box-header courses-featured-header">
+        <h4 class="title">Cursos em Destaque
+          <small><%= link_to courses_path, :class => "more-a", :title => "Ver mais cursos" do %>Mais Cursos <span class="icon arrow"></span><% end %></small>
+        </h4>
+      </header>
+      <div class="box-content courses-featured-content">
+        <ul class="courses-featured-ul clearfix">
+          <li class="courses-featured-li">
+            <a href="http://www.renatosaraiva.com.br/cursos/online/239" class="photo courses-featured-a" target="_blank" title="Disciplinas Complementares">
+              <figure class="photo-border courses-featured-figure">
+                <span></span> 
+                <img alt="Disciplinas Complementares" height="140" src="http://cers-statics.s3.amazonaws.com/tmp/bt-disciplinas_complementares-v1.jpg?AWSAccessKeyId=AKIAICFTELEOZWJWPSZQ&Expires=1390962916&Signature=2IWiS%2BDbdIv5Doo%2B%2BKeLd9nReGQ%3D
+" title="Disciplinas Complementares" width="230">
+              </figure>
+              <h2 class="visuallyhidden">
+                Disciplinas Complementares
+              </h2>
+            </a>
+          </li>
+          <% @featured_courses.each do |course| %>
+            <li class="courses-featured-li">
+              <%= link_to "http://www.renatosaraiva.com.br/cursos/onlineDetalhe/" + course.id.to_s, :class => "photo courses-featured-a", :title => course.title, :target => "_blank" do %>
+                <figure class='photo-border courses-featured-figure'>
+                  <span></span>
+                  <%= show_image course.image, "230x140", course.title %>
+                </figure>
+                <h2 class="visuallyhidden">
+                  <%= course.title %>
+                </h2>
+              <% end %>
+            </li>
+          <% end %>
+        </ul><!-- .courses-featured-ul -->
+      </div><!-- .courses-featured-content -->
+    </section><!-- .courses-featured -->
+   
+    <% #= render :partial => 'home_courses', :locals => { :category_groups => @category_groups } %>
+
+    <section class="books-featured box clearfix">
+      <header class="books-featured-header">
+        <strong class="title">Livros Digitais</strong>
+        <span class="triangle"></span>
+      </header>
+      <div class="books-featured-content">
+        <ul class="books-featured-ul">
+          <% @featured_books.includes(:cers_product).each do |book| %>
+          <li class="books-featured-li">
+            <%= link_to "http://www.renatosaraiva.com.br/cursos/onlineDetalhe/" + book.id.to_s, :class => "photo books-featured-a", :title => book.cers_product.title, :target => "_blank" do %>
+              <figure class='photo-border books-featured-figure'>
+                <span></span>
+                <%= show_image book.cover, "123x93", book.cers_product.title %>
+              </figure>
+              <div class='content'>
+                <h3 class='title'>
+                  <%= book.cers_product.title %>
+                </h3>
+              </div>
+            <% end %>
+          </li>
+          <% end %>
+        </ul><!-- .books-featured-ul -->
+      </div><!-- .books-featured-content -->
+    </section><!-- .books-featured -->
+  </div><!-- .courses-main-content -->
+</div><!-- .courses-main -->
+
+
+
+    <% content_for :scripts do %>
+      <%= javascript_include_tag "index" %>
+  <% end %>
+
+
+    <script type="text/javascript">
+    $.ajaxSetup({ cache: false });
+    $("#btn-search-course").on("click", function(){
+      search = $("#q").val();
+      $.post('/curso/busca', { search: search }, function(data){
+        $(data).ready(function(){
+          $('#load-search').empty();
+          $('#load-search').html(data);
+        });
+      });
+    });
+    $(".mod-courses-box-pagination").on("click", function(){
+      $('.mod-courses-box-pagination').data('type', 'html').on('ajax:success', function(event, data){
+        group_id = $('.new-mod-courses-box.tab.current').find('#current-group').val()
+        page = $(data).find('#group-'+group_id);
+        $('.new-mod-courses-box.tab.current').empty();
+        $('.new-mod-courses-box.tab.current').html(page.html());
+      });
+    });
+    //$('.spinner-field').spinner();
+    </script>
+

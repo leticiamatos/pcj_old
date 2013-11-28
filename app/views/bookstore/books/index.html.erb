@@ -1,0 +1,65 @@
+<div class="content-inner container clearfix">
+  <section class="box relative">
+    <header class="box-header content-header">
+      <h2 class="title title-section">Livros</h2>
+    </header>
+    <div class="box-content">
+      <p>Com o objetivo de disponibilizar e-books (livros digitais) com conteúdo dinâmico e funcional, a CERS Editora, produz obras digitais tendo como diferencial o poder interativo e a facilidade no acesso ao conteúdo. Acesse do seu Tablet, iPad e PC. Confira abaixo nossos títulos:</p>
+    </div>
+  </section><!-- .box -->
+</div><!-- .content-inner -->
+<div class="courses-main">
+  <div class="courses-main-content container">
+    <form id="search-form-courses" class="search-form search-courses-form" action="" role="search">
+        <span class="field-area">
+            <input type="text" name="q" id="q" placeholder="Encontre seu livro" class="search-input" value="<%= params[:q] unless params[:q].blank?%>">
+            <button type="submit" class="btn btn-search">Buscar</button>
+        </span>
+    </form><!-- #search-form-courses -->
+    <section class="courses-featured box">
+      <header class="box-header courses-featured-header">
+        <h4 class="title">Livros Disponíveis
+          <small><a href="http://www.renatosaraiva.com.br/cursos/online/77" class="more-a" target="_blank" title="Ver mais livros no CERS">Mais Livros <span class="icon arrow"></span></a></small>
+        </h4>
+      </header>
+      <div class="box-content courses-featured-content">
+        <ul class="courses-featured-ul clearfix">
+          <% @books.each do |book| %>
+          <li class="courses-featured-li">
+            <a href="http://www.renatosaraiva.com.br/cursos/onlineDetalhe/<%= book.id %>" class="photo courses-featured-a" target="_blank" title="<%= book.title %>">
+              <figure class="photo-border courses-featured-figure">
+                <span></span>
+                <%= show_image book.cover, "230x140", book.title %>
+              </figure>
+              <h2 class="visuallyhidden"><%= book.title.to(100) %></h2>
+            </a>
+          </li>
+          <% end %>
+        </ul><!-- .courses-featured-ul -->
+      </div><!-- .courses-featured-content -->
+    </section><!-- .courses-featured -->
+    <!--<section class="books-featured box clearfix">
+      <header class="books-featured-header"> 
+        <strong class="title">Cursos Online</strong>
+        <span class="triangle"></span>
+      </header>
+      <div class="books-featured-content">
+        <ul class="books-featured-ul">
+          < % @courses.each do |course| %>
+              <li class="books-featured-li">
+                <a href="http://www.renatosaraiva.com.br/cursos/onlineDetalhe/< %=course.id%>" class="photo books-featured-a" target="_blank" title="< %= course.title %>">
+                  <figure class="photo-border books-featured-figure">
+                    <span></span>
+                    <img src="http://placehold.it/123x93" alt="< %= course.title %>">
+                  </figure>
+                  <div class="content">
+                    <h3 class="title">< %= course.title.to(100) %></h3>
+                  </div>
+                </a>
+              </li>
+          < % end %>
+        </ul><!- .books-featured-ul -->
+      <!--</div><!- .books-featured-content -->
+    <!--</section><!- .books-featured -->
+  </div><!-- .courses-main-content -->
+</div><!-- .courses-main -->

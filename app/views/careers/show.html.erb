@@ -1,0 +1,62 @@
+<div class="careers-show">
+	<div class="content-inner careers-show-inner container clearfix">
+	  <section class="box relative col col-large">
+	    <header class="box-header content-header">
+	      <h2 class="title title-section">
+	      	Carreiras
+	      	<small>
+		        <%= link_to careers_path, :class => "more-a back", :title => "Voltar para listagem" do %>
+		          <span class="icon arrow"></span> Voltar
+		        <% end %>
+		      </small>
+	      </h2>
+	    </header>
+	    <div class="box-content">
+				<h3 class="title"><%= @cms_video.title %></h3>
+				<h4 class="subtitle"><%= @cms_video.description.html_safe %></h4>
+	    </div><!-- .box-content -->
+	  </section><!-- .box -->
+	</div><!-- .content-inner -->
+	<div class="careers-player-wrapper">
+		<div class="container careers-player-container">
+			<div id="player">
+				<iframe class="youtube-player" type="text/html" width="760" height="448" src="http://www.youtube.com/embed/<%= @cms_video.video %>?autoplay=1" allowfullscreen frameborder="0"></iframe>
+			</div>
+		</div>
+	</div>
+	<div class="content-inner content-careers-video-secondary container clearfix">
+		<section id="carrers-comments" class="careers-comment-box box box-2">
+			<header class="box-header">
+				<h2 class="title title-section">Comentários</h2>
+			</header>
+			<div class="box-content">
+				<div class="fb-comments" data-href="<%= career_path(@cms_video) %>" data-width="390" data-num-posts="10"></div>
+			</div>
+		</section>
+		<section id="videos-related-box" class="videos-related-box box box-2">
+			<header class="box-header">
+				<h2 class="title title-section">Vídeos Relacionados</h2>
+			</header>
+			<div class="box-content">
+				<ul id="videos-carousel" class="carousel-horizontal">
+					<% @cms_videos.each do |video| %>
+						<% if video.id != @cms_video.id %>
+							<li class="list-videos-li videos-carousel-li">
+								<%= link_to career_path(video), :title => video.title, :class => 'list-videos-a' do %>
+									<figure class="video-thumb">
+										<i class="icon-play"></i>
+										<%= image_tag video.thumb, :size => '180x100' %>
+									</figure>
+									<h3 class="video-title"><%= video.title %></h3>
+								<% end %>
+							</li>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+		</section>
+	</div>
+</div>
+<% content_for :scripts do %>
+    <%= javascript_include_tag "careers" %>
+<% end %>

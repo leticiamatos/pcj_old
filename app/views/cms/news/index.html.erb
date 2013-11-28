@@ -1,0 +1,105 @@
+<div class="content-inner container clearfix">
+  <section id="news-featured" class="news-featured clearfix bdbg">
+    <div id="news-banner" class="news-banner relative">
+      <div id="news-banner-content">
+        <% @banners.each do |banner| %>
+          <div class="banner-item news-banner-item">
+            <span class="border"></span>
+            <%= show_image banner.image, "556x330" %>
+            <div class="news-banner-item-content">
+              <a href="<%= banner.link %>" title="<%= banner.title %>" class="banner-item-a news-banner-item-a">
+                <h2 class="title"><%= banner.title %></h2>
+                <p class="sub"><%= banner.description %></p>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <a id="banner-prev" href="#" class="banner-nav news-featured-nav prev" title="Anterior">Anterior</a>
+      <a id="banner-next" href="#" class="banner-nav news-featured-nav next" title="Próximo">Próximo</a>
+    </div><!-- .news-banner -->
+    <div class="news-featured-boxes box">
+      <% if @news.count > 0 %>
+        <h2 class="news-any-title title-big">
+          <%= link_to @news[0].title, news_path(@news[0]), :class => "news-any-title-a" %>
+        </h2>
+      <% end %>
+      <span class="divider-line"></span>
+      <%
+         if @news.count > 2
+            for i in 1..2
+      %>
+        <article class="news-article-block news-block news-block-394">
+          <%= link_to news_path(@news[i]), :class => "photo", :title => @news[i].title do %>
+            <figure class="photo-border">
+              <span></span>
+              <%= show_image @news[i].thumb, "162x116", @news[i].title %>
+            </figure>
+            <div class="content">
+              <h2 class="title" style="text-transform: uppercase;"><%= @news[i].title %></h2>
+              <p><%= strip_tags(@news[i].text).to(130).html_safe %>...</p>
+            </div>
+          <% end %>
+        </article>
+      <%
+            end
+         end
+      %>
+    </div>
+  </section><!-- #news-featured -->
+  <section id="news-list-container" class="news-list-container clearfix bdtw">
+    <div class="news-list-columns">
+      <% if @news.count > 3
+            last = 2 + (@news.count - 4)
+            for i in 3..last
+              %>
+              <div class="news-list-col col">
+                <article class="news-article-block news-vertical news-block news-block-210">
+                  <%= link_to news_path(@news[i]), :class => "photo", :title => @news[i].title do %>
+                    <figure class="photo-border">
+                      <span></span>
+                      <%= show_image @news[i].thumb, "220x117", @news[i].title %>
+                    </figure>
+                    <div class="content">
+                      <h2 class="title" style="text-transform: uppercase;"><%= @news[i].title %></h2>
+                      <p><%= strip_tags(@news[i].text).to(130).html_safe %>...</p>
+                    </div>
+                  <% end %>
+                </article>
+                <!--<span class="divider-line"></span>
+                <h2 class="news-any-title title-medium"><a href="noticias-detalhe.html" class="news-any-title-a">Matheus Carvalho dá o incentivo que faltava para a sua preparação</a></h2>-->
+              </div><!--. news-list-col -->
+              <%
+           end
+        end
+      %>
+    </div><!-- .news-list-columns -->
+    <% if @news_hits.size > 0 %>
+    <div class="news-popular news-box box relative">
+      <header class="box-header with-btn-right clearfix">
+        <h4 class="title">Populares </h4>
+      </header>
+      <div id="news-box-content" class="box-content relative">
+        <ul id="news-carousel" class="news-carousel carousel carousel-vertical unstyled">
+          <% @news_hits.each do |news| %>
+          <li class="news-carousel-li news-block">
+            <%= link_to news_path(news), :class => "photo", :title => news.title do %>
+              <figure class="photo-border">
+                <span></span>
+                <%= show_image news.thumb, "84x59", news.title %>
+              </figure>
+              <div class="content">
+                <h3 class="title"><%= news.title %></h3>
+              </div>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+  </section><!-- #news-list-container -->
+</div><!-- .content-inner -->
+<% content_for :scripts do %>
+    <%= javascript_include_tag "news" %>
+<% end %>

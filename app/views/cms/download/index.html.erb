@@ -1,0 +1,54 @@
+<div class="content-inner two-columns two-columns-large container clearfix">
+  <section class="box relative col col-large">
+    <header class="box-header content-header">
+      <h2 class="title title-section">Downloads</h2>
+    </header>
+    <div class="box-content">
+      <p>Confira aqui os textos e artigos produzidos pelos professores do Portal Carreira Jurídica disponibilizados para download.</p>
+      
+      <% i = 0 %>
+      <% while i < @downloads.count do %>
+        <% files = nil %>
+        <dl class="mod mod-accordion">
+          <dt><%= @downloads[i].tag %><span class="arrow"></span></dt>
+          <dd>
+            <% files = @downloads.select { |d| d.tag == @downloads[i].tag } %>
+            <% i += files.count %>
+            <ul class="downloads-list">
+              <% files.each do |file| %>
+                <li>
+                  <%= link_to file.title, increment_hits_download_path(file), :target => "_blank" %>
+                </li>
+              <% end %>
+            </ul>
+          </dd>
+        </dl>
+      <% end %>      
+    </div>
+  </section><!-- .box -->
+  <div class="col col-default">
+    <div id="courses-box" class="box">
+      <header class="box-header with-btn-right clearfix">
+        <strong class="title">Cursos Disponíveis</strong>
+      </header>
+      <div class="box-content relative">
+        <ul class="courses-list unstyled">
+          <% @courses.each do |course| %>
+          <li class="courses-list-li">
+            <h2 class="courses-list-title">
+              <a href="http://www.renatosaraiva.com.br/cursos/onlineDetalhe/<%= course.id %>" class="courses-list-a" target="_blank">
+                <%= course.title.to(100) %>
+                <span class="icon"></span>
+              </a>
+            </h2>
+          </li>
+          <% end %>
+        </ul>
+        <a href="http://www.renatosaraiva.com.br/cursos/online" class="btn with-icon-right" title="Ver mais cursos do CERS" target="_blank">Ver mais cursos do CERS <span class="icon arrow"></span></a>
+      </div>
+    </div><!-- .box -->
+  </div><!-- col-default -->
+</div><!-- .content-inner -->
+<% content_for :scripts do %>
+    <%= javascript_include_tag "downloads" %>
+<% end %>

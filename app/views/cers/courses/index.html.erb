@@ -1,0 +1,129 @@
+<div class="content-inner container clearfix">
+  <section class="box relative">
+    <header class="box-header content-header">
+      <h2 class="title title-section">Cursos Online</h2>
+    </header>
+    <div class="box-content">
+      <p>Com o intuito de oferecer os melhores cursos online do Brasil, reunimos uma seleção de professores reconhecidos nacionalmente com o objetivo de prepará-lo para os principais concursos públicos da área jurídica. Aliando tecnologia, interatividade e conteúdo relevante. Tudo isso no melhor e mais exclusivo ambiente online.</p>
+    </div>
+  </section><!-- .box -->
+</div><!-- .content-inner -->
+<div class="courses-main">
+  <div class="courses-main-content container">
+    <%= render partial: "cers/courses/search_form" %>
+    <!--==========================================================================
+    RESULTADO
+    ========================================================================== -->
+    <section id="courses-result" class="courses-result" style="display:none">
+      <div class="new-mod-courses mod-courses-result">
+        <div class="courses-result-header">
+          <a id="btn-close-courses-result" href="javascript:;" class="btn-close close-courses-result">
+            <i class="icon"></i> Fechar Busca
+          </a>
+        </div><!-- .courses-result-header -->
+        <div id="load-search" class="new-mod-courses-box current" style="text-transform: uppercase;">
+        </div><!-- .new-mod-courses-box -->
+      </div><!-- .new-mod-courses -->
+    </section><!-- #courses-result -->
+    <section class="courses-featured box">
+      <header class="box-header courses-featured-header">
+        <h4 class="title">Cursos Disponíveis
+          <small><a href="http://www.renatosaraiva.com.br/cursos/online" class="more-a" target="_blank" title="Ver mais cursos no CERS">Mais Cursos <span class="icon arrow"></span></a></small>
+        </h4>
+      </header>
+      <div class="box-content courses-featured-content">
+        <ul class="courses-featured-ul clearfix">
+          <% @featured_courses.each do |course| %>
+          <li class="courses-featured-li">
+            <a href="http://www.renatosaraiva.com.br/cursos/onlineDetalhe/<%= course.id %>" class="photo courses-featured-a" target="_blank" title="<%= course.title %>">
+              <figure class="photo-border courses-featured-figure">
+                <span></span>
+                <%= show_image course.image, "230x140", course.title %>
+              </figure>
+              <h2 class="visuallyhidden"><%= course.title %></h2>
+            </a>
+          </li>
+          <% end %>
+        </ul><!-- .courses-featured-ul -->
+      </div><!-- .courses-featured-content -->
+    </section><!-- .courses-featured -->
+
+    <!--==========================================================================
+    ABAS
+    ========================================================================== -->
+    <section id="courses-tab" class="courses-few">
+      <div id="new-courses-tab" class="mod mod-cursos new-mod-courses">
+        <ul class="abas courses-tab cl">
+        <% title_length = 85 %>
+          <% @category_groups.each do |category| %>
+          <% if category == @category_groups.first %>
+          <li class="courses-tab-li current">
+          <% else %>
+          <li class="courses-tab-li">
+          <% end %>
+            <%= link_to "<span style='#{category.css_style} width: #{category.width}px; background-image: url(#{category.image.url})'>#{category.title}</span>".html_safe, "javascript:;", class: "courses-tab-a", title: category.title %>
+          </li> 
+          <% end %>
+        </ul><!-- .courses-tab -->
+        <div class="tab-content">
+          <% @category_groups.each_with_index do |group, i| %>
+          <% if group == @category_groups.first %>
+          <div id="group-<%= group.id %>" class="new-mod-courses-box tab current">
+          <% else %>
+          <div id="group-<%= group.id %>" class="new-mod-courses-box tab">
+          <% end %>
+          <%= hidden_field_tag 'current-group', group.id %>
+            <div class="mod-courses-box-cols">
+              <% courses = @courses.joins(:cers_categories => :cers_groups).where("cers_group_id = ?", group.id).page(params[:page]).per(30) %>
+              <% courses.each_with_index do |course, i| %>
+                <% if i % 10 == 0 %>
+                <ul class="courses-box-col">
+                <% end %>
+                <li class="courses-box-col-item">
+                  <span class="category" style="text-transform: uppercase;"><%= group.title %></span>
+                  <% title = (course.cers_product.title.size > title_length) ? (course.cers_product.title.upcase.to(title_length) + "...") : course.cers_product.title.upcase %>
+                  <%= link_to(title, "http://www.renatosaraiva.com.br/cursos/onlineDetalhe/"+course.id.to_s, :class => "courses-title", :style => "text-transform: uppercase;", :target => "_blank") %>
+                </li>
+                <% if i % 10 == 9 %>
+                  </ul><!-- .col -->
+                <% end %>
+              <% end %>
+            </div><!-- .mod-courses-box-cols -->
+            <div class="mod-courses-box-pagination">
+              <%= paginate courses, :remote => true %>
+            </div><!-- .mod-courses-box-pagination -->
+
+          </div><!-- .new-mod-courses-box -->
+          <% end %>
+        </div><!-- .tab-content -->
+      </div><!-- .new-mod-courses -->
+    </section><!-- #courses-tab -->
+
+    <section class="books-featured box clearfix">
+      <header class="books-featured-header">
+        <strong class="title">Livros Digitais</strong>
+        <span class="triangle"></span>
+      </header>
+      <div class="books-featured-content">
+        <ul class="books-featured-ul">
+          <% @featured_books.each do |book| %>
+          <li class="books-featured-li">
+            <a href="http://www.renatosaraiva.com.br/cursos/onlineDetalhe/<%= book.id %>" class="photo books-featured-a" target="_blank" title="<%= book.cers_product.title %>">
+              <figure class="photo-border books-featured-figure">
+                <span></span>
+                <%= show_image book.cover, "123x93", book.cers_product.title %>
+              </figure>
+              <div class="content">
+                <h3 class="title"><%= book.cers_product.title %></h3>
+              </div>
+            </a>
+          </li>
+          <% end %>
+        </ul><!-- .books-featured-ul -->
+      </div><!-- .books-featured-content -->
+    </section><!-- .books-featured -->
+  </div><!-- .courses-main-content -->
+</div><!-- .courses-main -->
+<% content_for :scripts do %>
+    <%= javascript_include_tag "vendor/jquery.lettering", "courses" %>
+<% end %>

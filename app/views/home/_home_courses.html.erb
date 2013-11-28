@@ -1,0 +1,42 @@
+<section id="courses-tab" class="courses-few">
+      <div id="new-courses-tab" class="mod mod-cursos new-mod-courses">
+        <ul class="abas courses-tab cl">
+          <% title_length = 85 %>
+          <% category_groups.each do |category| %>
+            <% if category == category_groups.first %>
+              <li class="courses-tab-li current">
+            <% else %>
+              <li class="courses-tab-li">
+            <% end %>
+            <%= link_to "<span style='#{category.css_style} width: #{category.width}px; background-image: url(#{category.image.url})'>#{category.title}</span>".html_safe, "javascript:;", class: "courses-tab-a", title: category.title %>
+              </li>
+          <% end %>
+        </ul><!-- .courses-tab -->
+        <div class="tab-content">
+          <% category_groups.each_with_index do |group, i| %>
+            <% if group == category_groups.first %>
+              <div class="new-mod-courses-box tab current">
+            <% else %>
+              <div class="new-mod-courses-box tab">
+            <% end %>
+            <div class="mod-courses-box-cols">
+            <% courses = group.cers_courses.includes(:cers_product).salable.tagged_with("pcj").limit(3) %>
+            <% courses.each_with_index do |course, i| %>
+                <% if i == 0 %>
+                  <ul class="courses-box-col">
+                <% end %>
+                <li class="courses-box-col-item">
+                  <span class="category" style="text-transform: uppercase;"></span>
+                  <% title = (course.title.size > title_length) ? (course.title.upcase.to(title_length) + "...") : course.title.upcase %>
+                  <%= link_to(title, "http://www.renatosaraiva.com.br/cursos/onlineDetalhe/"+course.id.to_s, :class => "courses-title", :style => "text-transform: uppercase;", :target => "_blank") %>
+                </li>
+                <% if courses.limit(3).last == course %>
+                  </ul><!-- .col -->
+                <% end %>
+            <% end %>
+            </div><!-- .mod-courses-box-cols -->
+            </div><!-- .new-mod-courses-box -->
+          <% end %>
+        </div><!-- .tab-content -->
+      </div><!-- .new-mod-courses -->
+    </section><!-- #courses-tab -->

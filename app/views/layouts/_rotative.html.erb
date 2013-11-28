@@ -1,0 +1,16 @@
+<section id="banner" role="banner" class="relative">
+  <div id="banner-content" style="z-index: 0;">
+    <% @banners.each do |banner| %>
+      <a href="<%= increment_hits_banner_path(banner) %>" class="banner-item-a" title="<%= banner.title %>" target="_blank" style="background-image: url(<%= banner.image.url %>);">
+        <div class="banner-item">
+            <div class="banner-item-content container">
+                <h2 class="title"><%= banner.title %></h2>
+                <p class="sub"><%= banner.description %></p>
+            </div>
+        </div>
+      </a>
+    <% end %>
+  </div>
+  <a href="#" class="banner-nav prev" id="banner-prev" title="Anterior">Anterior</a>
+  <a href="#" class="banner-nav next" id="banner-next" title="Próximo">Próximo</a>
+</section>

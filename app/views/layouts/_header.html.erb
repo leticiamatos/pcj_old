@@ -1,0 +1,59 @@
+<header id="header" class="header">
+  <div class="header-primary relative">
+      <div class="header-primary-content container relative clearfix">
+           <div id="barra" class="container">
+            <nav class="menu" role="navigation" style="margin-left: 33%">
+                <ul class="clearfix">
+                  <li class="menu-quem-somos"><a href="/quem-somos" title="Quem Somos">Quem Somos</a></li>
+                  <li class="menu-quem-somos"><a href="http://cers.com.br/faleconosco/index" title="Quem Somos">Contato</a></li>
+                  <li class="ico ico-youtube"><a href="http://www.youtube.com/cerenatosaraiva" title="Youtube" class="ir" target="_blank">Youtube</a></li>
+                  <li class="ico ico-facebook"><a href="https://www.facebook.com/portalcarreirajuridica" title="Facebook" class="ir" target="_blank">Facebook</a></li>
+                  <li class="ico ico-twitter"><a href="http://twitter.com/cerenatosaraiva" title="Twitter" class="ir" target="_blank">Twitter</a></li>
+                </ul>
+            </nav>
+          </div>
+          <h1 class="header-logo">
+              <%= link_to root_path, :class => "header-logo-a", :title => "Portal Carreira Jurídica" do %>
+                  <img src="/assets/logo-portal-carreiras-juridicas.png?c" alt="">
+                  <span class="visuallyhidden">Portal Carreira Jurídica</span>
+              <% end %>
+          </h1>
+      </div>
+      <span class="line"></span>  
+  </div>
+  <div class="header-secondary">
+      <div class="header-secondary-content container clearfix">
+          <nav class="nav-global nav-bar" role="navigation">
+              <ul class="nav nav-ul clearfix">
+                  <li class="nav-li nav-online-courses">
+                    <%= link_to "Cursos Online", courses_path, :class => "nav-a", :title  => "Cursos Online" %>
+                  </li>
+                  <li class="nav-li nav-teachers">
+                    <%= link_to "Professores", teachers_path, :class => "nav-a", :title => "Professores" %>
+                  </li>
+                  <li class="nav-li nav-careers">
+                    <%= link_to "Carreiras", careers_path, :class => "nav-a", :title => "Carreiras" %>
+                  </li>
+                  <li class="nav-li nav-downloads">
+                    <%= link_to "Downloads", download_path, :class => "nav-a", :title => "Downloads" %>
+                  </li>
+                  <li class="nav-li nav-news">
+                    <%= link_to "Notícias", news_index_path, :class => "nav-a", :title => "Notícias"%>
+                  </li>
+                  <!--<li class="nav-li nav-blogs">
+                    <a href="" class="nav-a" title="Blogs">Blogs</a>
+                  </li>-->
+                  <li class="nav-li nav-livros">
+                    <%= link_to "Livros", books_path, :class => "nav-a", :title => "Livros"%>
+                  </li>
+              </ul>
+          </nav>
+          <!--<fieldset id="search">
+              <form class="search-form" action="" role="search">
+                  <input type="text" name="q" id="q" placeholder="O que você procura?" class="search-input">
+                  <button type="submit" class="btn btn-search">Buscar</button>    
+              </form>
+          </fieldset>-->
+      </div>
+  </div>
+</header>

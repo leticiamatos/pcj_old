@@ -1,0 +1,38 @@
+@mixin font-mixin($font, $size, $color){
+    font-weight: normal;
+    font-family: $font;
+    font-size: $size;
+    color: $color;
+}
+
+@mixin box-shadow($color: 1px 1px 0 #fff){
+    box-shadow:$color;
+    -moz-box-shadow:$color;
+    -webkit-box-shadow:$color;
+}
+
+@mixin border-radius($radius : 5px){
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+}
+
+@mixin trans( $trans: all .25s ease-in-out ) {
+  -moz-transition: $trans;
+  -o-transition: $trans;
+  -webkit-transition: $trans;
+  transition: $trans;
+}
+
+@mixin wrap{
+  text-wrap: wrap;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  word-wrap: break-word;
+}
+
+@mixin inline-block{
+  display:inline-block;
+  *display:inline;
+  zoom:1;
+}

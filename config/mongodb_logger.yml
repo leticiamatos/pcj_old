@@ -1,0 +1,10 @@
+development:
+  database: kurumi_logger
+  capsize: <%= 10.megabytes %>
+  host: localhost
+  port: 27017
+
+production:
+  database: manager_logger
+  host: localhost
+  port: 27017

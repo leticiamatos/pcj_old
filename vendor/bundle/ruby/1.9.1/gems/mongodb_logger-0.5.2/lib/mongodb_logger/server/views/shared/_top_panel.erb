@@ -1,0 +1,7 @@
+<div class="topline">
+  <%= partial(:"shared/tabs") %>
+  <div class="unit-right">
+    <% yield_content :right_top_panel %>
+  </div> <!-- unit-right -->
+  <div id="ajaxLoader"><img src="<%= asset_path 'spinner.gif' %>" alt="loading..."></div>
+</div> <!-- topline -->

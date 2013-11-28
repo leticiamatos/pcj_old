@@ -1,0 +1,55 @@
+<div class="teachers-profile-header">
+  <div class="teachers-profile-primary">
+    <div class="teachers-profile-primary-content container relative">
+      <div class="teachers-profile-primary-text">
+        <h1 class="title teachers-title"><%=  @teacher.name %></h1>
+        <p class="desc"><%= @teacher.cers_subject.title unless @teacher.cers_subject.nil? %></p>
+      </div>
+      <figure class="teachers-profile-figure">
+        <%= image_tag @teacher.cover.url unless @teacher.cover.nil? %>
+      </figure>
+    </div>
+  </div>
+  <nav class="teachers-profile-nav">
+    <div class="container">
+      <!--<ul class="teachers-links teachers-profile-nav-ul unstyled">
+        <li class="active"><a href="/" title="Perfil" class="l-profile"><i class="icon"></i>Perfil</a></li>
+        <li><a href="/blog" title="Blog" class="l-blog"><i class="icon"></i>Blog</a></li>
+        <li><a href="" title="Cursos" class="l-courses"><i class="icon"></i>Cursos</a></li>
+      </ul>-->
+    </div>
+  </nav>
+</div>
+<div class="content-inner two-columns two-columns-large container clearfix">
+  <section class="box relative col col-large">
+    <header class="content-header">
+      <h2 class="title title-section">Perfil</h2>
+    </header>
+    <%= @teacher.about.html_safe %>
+  </section><!-- .box -->
+  <!--
+  <div class="col col-default">
+    <div id="courses-box" class="box">
+      <header class="box-header with-btn-right clearfix">
+        <strong class="title">Cursos do Professor</strong>
+      </header>
+      <div class="box-content relative">
+        <ul class="courses-list unstyled">
+          <% #@cers_courses_teacher.each do |course| %>
+            <li class="courses-list-li">
+              <h2 class="courses-list-title">
+                <a href="http://www.renatosaraiva.com.br/cursos/onlineDetalhe/<%#= course.id %>" class="courses-list-a" target="_blank">
+                  <%#= course.title %>
+                  <span class="icon"></span>
+                </a>
+              </h2>
+            </li>
+          < % end %>
+        </ul>
+        <a href="http://www.renatosaraiva.com.br/cursos/online" class="btn with-icon-right" title="Ver mais cursos do CERS" target="_blank">Ver mais cursos do CERS <span class="icon arrow"></span></a>
+      </div>
+    </div><-.box >
+  </div>< - col-default 
+  -->
+</div><!-- .content-inner -->
+

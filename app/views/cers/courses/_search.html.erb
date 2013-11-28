@@ -1,0 +1,46 @@
+<div class="mod-courses-category">
+  <header class="mod-courses-category-header">
+    <h3 class="title">Cursos Online</h3>
+  </header>
+  <div class="mod-courses-box-cols">
+  <% title_length = 85 %>
+  <% @courses.first(6).each_with_index do |course, i| -%>
+    <% title = (course.cers_product.title.size > title_length) ? (course.cers_product.title.upcase.to(title_length) + "...") : course.cers_product.title.upcase %>
+    <% if i == 0 %>
+      <ul class="courses-box-col">
+    <% end %>
+        <li class="courses-box-col-item">
+          <%= link_to(title, "http://www.renatosaraiva.com.br/cursos/onlineDetalhe/"+course.id.to_s, :class => "courses-title", title: course.cers_product.title.upcase, :target => "_blank") %>
+        </li>
+        <% puts i %>
+    <% if (i+1) % 3 == 0 %>
+      </ul><!-- .col -->
+      <% unless course == @courses.first(6).last %>
+        <ul class="courses-box-col">
+      <% end %>
+    <% end %>
+  <% end %>
+  </div><!-- .mod-courses-box-cols -->
+</div><!-- .mod-courses-category -->
+<div class="mod-courses-category">
+  <header class="mod-courses-category-header">
+    <h3 class="title">Livros Digitais</h3>
+  </header>
+  <div class="mod-courses-box-cols">
+    <% @books.first(3).each_with_index do |book, i| -%>
+      <% title = (book.cers_product.title.size > title_length) ? (book.cers_product.title.upcase.to(title_length) + "...") : book.cers_product.title.upcase %>
+      <% if i == 0 %>
+        <ul class="courses-box-col">
+      <% end %>
+          <li class="courses-box-col-item">
+            <%= link_to( title, "http://www.renatosaraiva.com.br/cursos/onlineDetalhe/"+book.id.to_s, title: book.cers_product.title.upcase, :class => "courses-title", :target => "_blank") %>
+          </li>
+      <% if (i+1) % 3 == 0 %>
+        </ul><!-- .col -->
+        <% unless book == @books.first(3).last %>
+          <ul class="courses-box-col">
+        <% end %>
+      <% end %>
+    <% end %>
+  </div><!-- .mod-courses-box-cols -->
+</div><!-- .mod-courses-category -->

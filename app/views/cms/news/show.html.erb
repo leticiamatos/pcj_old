@@ -1,0 +1,65 @@
+
+<div class="content-lighten clearfix">
+  <div class="content-inner two-columns container clearfix">
+    <article class="news-article-detail col col-large">
+      <header class="news-article-detail-header">
+        <span class="article-date"><%= l(@news.published_at, format: :long) if @news.published_at.present? %></span>
+        <h1 class="article-title"><%= @news.title %></h1>
+        <div class="social">
+            <span class="google">
+                <div class="g-plusone" data-size="medium"></div>
+            </span>
+            <span class="twitter">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt">Tweetar</a>
+            </span>
+            <span class="facebook">
+                <div class="fb-like" data-send="true" data-layout="button_count" data-width="140" data-show-faces="false"></div>
+            </span>
+        </div>
+      </header>
+      <section class="news-article-detail-content">
+        <%= @news.text.html_safe %>
+      </section>
+      <footer class="news-article-detail-footer">
+        <div class="social">
+            <span class="google">
+                <div class="g-plusone" data-size="medium"></div>
+            </span>
+            <span class="twitter">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt">Tweetar</a>
+            </span>
+            <span class="facebook">
+                <div class="fb-like" data-send="true" data-layout="button_count" data-width="140" data-show-faces="false"></div>
+            </span>
+        </div>
+      </footer>
+    </article>
+    <div class="col col-default shadow">
+      <%= render :partial => 'layouts/news_box' %>
+    </div><!-- col-default -->
+  </div><!-- .content-inner -->
+</div><!-- .content-outer -->
+<aside class="related-news container box">
+  <header class="box-header">
+    <strong class="title">Notícias Relacionadas</strong>
+  </header>
+  <div class="box-content clearfix">
+    <% @news_related.each do |news_related| %>
+    <article class="news-article-block news-vertical news-block news-block-210">
+      <%= link_to news_path(news_related), :class => "photo", :title => news_related.title do %>
+        <figure class="photo-border">
+          <span></span>
+          <%= show_image news_related.thumb, "220x117", news_related.title %>
+        </figure>
+        <div class="content">
+          <h2 class="title" style="text-transform: uppercase;"><%= news_related.title %></h2>
+          <p><%= sanitize(news_related.text[0..130]).html_safe %>...</p>
+        </div>
+      <% end %>
+    </article>
+    <% end %>
+  </div>
+</aside><!-- .related-news -->
+<% content_for :scripts do %>
+    <%= javascript_include_tag "news-detail" %>
+<% end %>

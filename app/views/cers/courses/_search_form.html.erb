@@ -1,0 +1,6 @@
+<%= form_tag(cers_courses_search_path, :id => "search-form-courses", :class => "search-form search-courses-form", :role => "search") do %>
+  <span class="field-area">
+    <%= text_field_tag :q, @search, :placeholder => "Encontre seu curso", :class => "search-input" %>
+    <%= submit_tag "Buscar", :id => "btn-search-course", :class => "btn btn-search" %>   
+  </span>
+<% end %>

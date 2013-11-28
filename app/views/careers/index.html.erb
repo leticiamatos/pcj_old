@@ -1,0 +1,25 @@
+<div class="content-inner container clearfix">
+  <section class="box relative col col-large">
+    <header class="box-header content-header">
+      <h2 class="title title-section">Carreiras</h2>
+    </header>
+    <div class="box-content">
+			<ul class="list-videos">
+				<% @cms_videos.each do |video| %>
+					<li class="list-videos-li">
+						<%= link_to career_path(video), :title => video.title, :class => 'list-videos-a' do %>
+							<figure class="video-thumb">
+								<i class="icon-play"></i>
+								<%= show_image video.thumb, :size => '180x100' %>
+							</figure>
+							<h3 class="video-title"><%= video.title %></h3>
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+    </div>
+  </section>
+</div>
+<% content_for :scripts do %>
+    <%= javascript_include_tag "careers" %>
+<% end %>

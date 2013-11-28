@@ -1,0 +1,12 @@
+test:
+  adapter: mysql
+  username: user
+  database: database
+  mongodb_logger:
+    database: system_log
+    replica_set: true
+    hosts:
+      - - 127.0.0.1
+        - 27018
+      - - 127.0.0.1
+        - 27019

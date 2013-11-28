@@ -1,0 +1,34 @@
+<div class="outer mvs filter_block">
+  <div class="unit size1of3">
+    <div class="unit size1of2">
+      <div class="prm">
+        <%= select_tag dynamic_filter, :type, MongodbLogger::ServerModel::AdditionalFilter::VAR_TYPES, :class => "filter_type", "data-url" => url_path("changed_filter") %>
+      </div> <!-- prm -->      
+    </div> <!-- unit -->
+    <div class="unit size1of2">
+      <div class="prm">
+        <%= text_field_tag dynamic_filter, :key, :placeholder => "key" %>
+      </div> <!-- prm -->      
+    </div> <!-- unit -->
+  </div>
+  <div class="unit size1of3">
+    <div class="unit size1of2">
+      <div class="prm">
+        <%= select_tag dynamic_filter, :condition, MongodbLogger::ServerModel::AdditionalFilter::VAR_TYPE_CONDITIONS[dynamic_filter.get_type_index], :class => "filter_conditions" %>
+      </div> <!-- prm -->      
+    </div>
+    <div class="unit size1of2">
+      <div class="prm filter_values">
+        <% if dynamic_filter.is_selected_values? %>
+          <%= select_tag dynamic_filter, :value, dynamic_filter.selected_values %>
+        <% else %>
+          <%= text_field_tag dynamic_filter, :value, :placeholder => "value", :class => dynamic_filter.type %>
+        <% end %>
+      </div> <!-- prm -->      
+    </div>
+  </div>
+  <div class="unit size1of3">
+    <a href="#" class="close_more_filter">Close</a>
+  </div> <!-- unit -->
+
+</div>

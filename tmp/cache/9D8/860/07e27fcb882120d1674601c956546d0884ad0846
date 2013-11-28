@@ -1,0 +1,10 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1385413394.443455:@value"£[I"–CJ.professores = {
+	init: function(){
+		CJ.carousel('.carousel-vertical', 2, 'slow', 5);
+	}
+}
+
+$(window).load(function(){
+	CJ.professores.init();
+});
+:EF
